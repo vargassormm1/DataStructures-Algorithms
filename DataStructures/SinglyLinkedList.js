@@ -95,4 +95,59 @@ class SinglyLinkedList {
     }
     return false;
   }
+
+  insert(index, val) {
+    if (index < 0 || index > this.length) {
+      return false;
+    } else if (index === this.length) {
+      return !!this.push(val);
+    } else if (index === 0) {
+      return !!this.unShift(val);
+    } else {
+      let newNode = new Node(val);
+      let nodeBefore = this.get(index - 1);
+      let previousNext = nodeBefore.next;
+      nodeBefore.next = newNode;
+      newNode.next = previousNext;
+    }
+    this.length++;
+    return true;
+  }
+
+  remove(index) {
+    if (index < 0 || index > this.length) return undefined;
+    if (index === 0) return this.shift;
+    if (index === this.length - 1) return this.pop;
+
+    let prevNode = this.get(index - 1);
+    let removed = prevNode.next;
+    prevNode.next = removed.next;
+    this.length--;
+    return removed;
+  }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    let prev = null;
+    let next;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
 }
+
+let list = new SinglyLinkedList();
+list.push("matt");
+list.push("sean");
+list.push("will");
+list.push("Ann");
+
+list.reverse();
+console.log(list);
