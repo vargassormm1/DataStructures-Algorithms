@@ -142,12 +142,3 @@ class SinglyLinkedList {
     return this;
   }
 }
-
-let list = new SinglyLinkedList();
-list.push("matt");
-list.push("sean");
-list.push("will");
-list.push("Ann");
-
-list.reverse();
-console.log(list);
